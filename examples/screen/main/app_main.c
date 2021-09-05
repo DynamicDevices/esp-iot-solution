@@ -135,7 +135,7 @@ static void lcd_bitmap_test(scr_driver_t *lcd)
         return;
     }
     memcpy(pixels, img_array, (img_width * img_height) * sizeof(uint16_t));
-    lcd->draw_bitmap(0, 0, img_width, img_height, (uint16_t *)pixels);
+    lcd->draw_bitmap( (lcd_info.width-img_width)/2, (lcd_info.height-img_height)/2, img_width, img_height, (uint16_t *)pixels);
     heap_caps_free(pixels);
 }
 
@@ -301,7 +301,7 @@ void app_main(void)
     g_lcd.get_info(&g_lcd_info);
     ESP_LOGI(TAG, "Screen name:%s | width:%d | height:%d", g_lcd_info.name, g_lcd_info.width, g_lcd_info.height);
 
-    screen_clear(&g_lcd, COLOR_ESP_BKGD);
+    screen_clear(&g_lcd, COLOR_BLACK);
     vTaskDelay(pdMS_TO_TICKS(500));
 
     /**  Run test */
